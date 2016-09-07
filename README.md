@@ -1,2 +1,1 @@
-# scf
-Sistema controle financeiro
+# Sistema controle financeiro

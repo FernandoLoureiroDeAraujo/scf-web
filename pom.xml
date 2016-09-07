@@ -4,12 +4,14 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.loureiro</groupId>
-	<artifactId>sfc</artifactId>
+	<groupId>br.com.loureiro.scf</groupId>
+	<artifactId>scf</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
 	<dependencies>
+
+		<!-- JSF -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -20,11 +22,21 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.13</version>
 		</dependency>
+
+		<!-- MARIADB -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>1.5.2</version>
 		</dependency>
+
+		<!-- JUNIT -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
