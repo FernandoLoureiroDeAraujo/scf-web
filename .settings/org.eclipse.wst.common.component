@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/scf/target/classes"/>
-        <property name="context-root" value="scf-web"/>
+        <property name="java-output-path" value="/scf-web/target/classes"/>
+        <property name="context-root" value="scf"/>
     </wb-module>
 </project-modules>
