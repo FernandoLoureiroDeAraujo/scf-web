@@ -19,6 +19,13 @@
             <br />
             <h:commandButton value="Submit" action="#{beanLogin.UservalidOrnot}"></h:commandButton>
         </h:panelGrid>
+        
+<!--         <h:outputScript rendered="#{beanLogin.status}"> -->
+<!--     		alert('hello'); -->
+<!-- 		</h:outputScript> -->
+        
+        <h:outputText value="#{beanLogin.status}" />
+        
     </h:form>
 </h:body>
 </html>

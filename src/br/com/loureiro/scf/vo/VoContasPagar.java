@@ -4,19 +4,10 @@ import java.util.Date;
 
 public class VoContasPagar extends VoContas {
 	
-	private Date dataVencimento;
-	private Integer tipoPagamento;
+	public VoContasPagar() {}
 	
-	public Date getDataVencimento() {
-		return dataVencimento;
+	public VoContasPagar(Integer id, String descricao, Double valor, Date dataVencimento, Integer tipoPagamento) {
+		super(id, descricao, valor, dataVencimento, tipoPagamento);
 	}
-	public Integer getTipoPagamento() {
-		return tipoPagamento;
-	}
-	public void setDataVencimento(Date dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-	public void setTipoPagamento(Integer tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
-	}
+	
 }

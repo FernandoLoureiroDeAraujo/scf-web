@@ -2,7 +2,7 @@ package br.com.loureiro.scf.vo;
 
 import java.io.Serializable;
 
-public class VoLogin implements Serializable {
+public class VoLoginExample implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

@@ -2,18 +2,20 @@ package br.com.loureiro.scf.modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Map;
 
 import br.com.loureiro.scf.util.UtlScf;
 
 public class MdlCRUD extends MdlConexaoBanco {
 	
-	Map<Integer, Object[]> fields = null;
+	Connection conn = null;
+	PreparedStatement stmt = null;	
+	ResultSet rset = null;
 	
+	Map<Integer, Object[]> fields = null;
+
 	public void save(Object mClass) throws Exception {
-		
-		Connection conn = null;
-		PreparedStatement stmt = null;	
 		
 		try {
 			
@@ -50,4 +52,26 @@ public class MdlCRUD extends MdlConexaoBanco {
 		
 		return str.toString();
 	}
+	
+	public void findAll(Class<?> mClass, MdlCrudResult crudResult) throws Exception {
+		
+        try {
+            conn = getConexao();
+            stmt = conn.prepareStatement(mountFindAllQuery(mClass));
+            rset = stmt.executeQuery();
+
+        	crudResult.onSucess(rset);
+        } finally {
+            fecharTodasConexoes(conn, stmt, rset);
+        }
+
+	}
+	
+	private String mountFindAllQuery(Class<?> mClass) {
+		StringBuilder str = new StringBuilder();
+		str.append("SELECT * FROM ");
+		str.append(mClass.getSimpleName().replace("Vo", "Tbl"));
+		return str.toString();
+	}
+	
 }

@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -40,5 +39,13 @@ public class UtlScf {
 		
 		return fieldMap;
 	}
+	
+    public static String concatenar(Object... objects) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < objects.length; i++) {
+            str.append(objects[i]);
+        }
+        return str.toString();
+    }
 	
 }
