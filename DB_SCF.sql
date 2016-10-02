@@ -1,6 +1,8 @@
 -- CRIAÇÃO DO BANCO DE DADOS.
 CREATE DATABASE DB_SCF;
 
+-- DROP DATABASE DB_SCF;
+
 -- USANDO O BANCO DE DADOS.
 USE DB_SCF;
 
@@ -62,19 +64,12 @@ INSERT INTO DB_SCF.TblContasReceber VALUES (NULL, "Amigo 1", 20.90, now(), 1);
 INSERT INTO DB_SCF.TblContasReceber VALUES (NULL, "Amigo 2", 100.50, now(), 1);
 INSERT INTO DB_SCF.TblContasReceber VALUES (NULL, "Amigo 3", 10, now(), 1);
 
-
 -- SELECTS.
 SELECT * FROM DB_SCF.TblTipoPagamento;
 SELECT * FROM DB_SCF.TblContasPagas;
 SELECT * FROM DB_SCF.TblContasReceber;
 
--- DROP DATABASE DB_SCF;
-
 SELECT * 
 FROM DB_SCF.TblContasPagas cp
 WHERE cp.PERIODO
-BETWEEN (STR_TO_DATE(2000-01-01, '%Y-%m-%d')) AND (STR_TO_DATE(2070-01-01, '%Y-%m-%d')) 
-
-SELECT * FROM TblContasReceber WHERE PERIODO BETWEEN ('2000-01-01') AND ('2070-01-01');
-
- SELECT * FROM TblContasReceber
+BETWEEN ('2000-01-01') AND ('2070-01-01');
