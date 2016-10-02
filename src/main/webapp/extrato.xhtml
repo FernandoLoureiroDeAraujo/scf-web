@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/resources/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">>
+
+	<ui:define name="titulo">Extratos</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="saldo">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
+				<div class="panel-body">Selecione um filtro para consultar seu extrato:</div>
+				<div class="panel-body"> Por data:
+					<h:inputText a:placeholder="Ex: xx/xx/xxxx" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:inputText>	até
+					<h:inputText a:placeholder="Ex: xx/xx/xxxx" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:inputText>
+				</div>
+				<div class="panel-body"> Por mês de referência:
+					<h:selectOneMenu value="#{beanSaldo.vo.mesReferencia}">
+						<f:selectItem itemValue="1" itemLabel="Janeiro" />
+						<f:selectItem itemValue="2" itemLabel="Fevereiro" />
+						<f:selectItem itemValue="3" itemLabel="Março" />
+						<f:selectItem itemValue="4" itemLabel="Abril" />
+						<f:selectItem itemValue="5" itemLabel="Maio" />
+						<f:selectItem itemValue="6" itemLabel="Junho" />
+						<f:selectItem itemValue="7" itemLabel="Julho" />
+						<f:selectItem itemValue="8" itemLabel="Agosto" />
+						<f:selectItem itemValue="9" itemLabel="Setembro" />
+						<f:selectItem itemValue="10" itemLabel="Outubro" />
+						<f:selectItem itemValue="11" itemLabel="Novembro" />
+						<f:selectItem itemValue="12" itemLabel="Dezembro" />
+					</h:selectOneMenu>
+				</div>
+				<div class="panel-footer">
+					<div align="right">
+						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanSaldo.relatorio}"/>
+					</div>
+				</div>
+				
+				<h:dataTable value="#{beanSaldo.lista}" var="lista">
+					<h:column headerClass="helpHed" id="coluna1">
+						<f:facet name="header">
+							<h:outputText value="Conta"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{lista.tipoPagamento}"></h:outputText>				
+					</h:column>
+					<h:column headerClass="helpHed" id="coluna2">
+						<f:facet name="header">
+							<h:outputText value="Valor"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{lista.descricao}"></h:outputText>				
+					</h:column>
+					<h:column headerClass="helpHed" id="coluna3">
+						<f:facet name="header">
+							<h:outputText value="Data"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{lista.data}"></h:outputText>				
+					</h:column>
+					<h:column headerClass="helpHed" id="coluna4">
+						<f:facet name="header">
+							<h:outputText value="Valor"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{lista.valor}"></h:outputText>				
+					</h:column>
+				</h:dataTable>
+				
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/resources/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">>
+
+	<ui:define name="titulo">Contas a Receber</ui:define>
+	        <h1> <h:outputText value="JavaBeat JSF 2.2 Examples" /></h1>
+
+	<ui:define name="corpo">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
+			<div class="panel-body">Digite os dados do recebimento: </div>
+			<div class="panel-body">Proveniente de: <h:inputText value="" a:placeholder="Ex: Salário" /></div>
+			<div class="panel-body">Valor a receber: <h:inputText value="" a:placeholder="Ex: 100,00"/></div>
+			<div class="panel-body">Data de recebimento: <h:inputText value="" a:placeholder="Ex: xx/xx/xxxx"/></div>
+			<div class="panel-body">Mês de referência: 
+			<h:selectOneMenu value="#{userData.data}">
+			   <f:selectItem itemValue="janeiro" itemLabel="Janeiro" />
+			   <f:selectItem itemValue="fevereiro" itemLabel="Fevereiro" />
+			   <f:selectItem itemValue="marco" itemLabel="Março"/>	
+			   <f:selectItem itemValue="abril" itemLabel="Abril"/>	
+			   <f:selectItem itemValue="maio" itemLabel="Maio"/>	
+			   <f:selectItem itemValue="junho" itemLabel="Junho"/>	
+			   <f:selectItem itemValue="julho" itemLabel="Julho"/>	
+			   <f:selectItem itemValue="agosto" itemLabel="Agosto"/>	
+			   <f:selectItem itemValue="setembro" itemLabel="Setembro"/>	
+			   <f:selectItem itemValue="outubro" itemLabel="Outubro"/>	
+			   <f:selectItem itemValue="novembro" itemLabel="Fevereiro"/>	
+			   <f:selectItem itemValue="dezembro" itemLabel="Dezembro"/>		     							
+			</h:selectOneMenu></div>
+			<div class="panel-body">Opções de pagamento:
+			<h:selectOneMenu value="#{userData.data}">
+			   <f:selectItem itemValue="parcial" itemLabel="Pagar valor parcial" />
+			   <f:selectItem itemValue="total" itemLabel="Pagar valor total" />		   	     							
+			</h:selectOneMenu></div>
+			<div class="panel-footer"><div align="right"><h:commandButton styleClass="btn btn-primary" 	value="Cadastrar" /></div>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
