@@ -5,41 +5,37 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">>
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Contas a Receber</ui:define>
-	        <h1> <h:outputText value="JavaBeat JSF 2.2 Examples" /></h1>
+	<ui:define name="titulo">Contas Receber</ui:define>
 
 	<ui:define name="corpo">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
-			<div class="panel-body">Digite os dados do recebimento: </div>
-			<div class="panel-body">Proveniente de: <h:inputText value="" a:placeholder="Ex: Salário" /></div>
-			<div class="panel-body">Valor a receber: <h:inputText value="" a:placeholder="Ex: 100,00"/></div>
-			<div class="panel-body">Data de recebimento: <h:inputText value="" a:placeholder="Ex: xx/xx/xxxx"/></div>
-			<div class="panel-body">Mês de referência: 
-			<h:selectOneMenu value="#{userData.data}">
-			   <f:selectItem itemValue="janeiro" itemLabel="Janeiro" />
-			   <f:selectItem itemValue="fevereiro" itemLabel="Fevereiro" />
-			   <f:selectItem itemValue="marco" itemLabel="Março"/>	
-			   <f:selectItem itemValue="abril" itemLabel="Abril"/>	
-			   <f:selectItem itemValue="maio" itemLabel="Maio"/>	
-			   <f:selectItem itemValue="junho" itemLabel="Junho"/>	
-			   <f:selectItem itemValue="julho" itemLabel="Julho"/>	
-			   <f:selectItem itemValue="agosto" itemLabel="Agosto"/>	
-			   <f:selectItem itemValue="setembro" itemLabel="Setembro"/>	
-			   <f:selectItem itemValue="outubro" itemLabel="Outubro"/>	
-			   <f:selectItem itemValue="novembro" itemLabel="Fevereiro"/>	
-			   <f:selectItem itemValue="dezembro" itemLabel="Dezembro"/>		     							
-			</h:selectOneMenu></div>
-			<div class="panel-body">Opções de pagamento:
-			<h:selectOneMenu value="#{userData.data}">
-			   <f:selectItem itemValue="parcial" itemLabel="Pagar valor parcial" />
-			   <f:selectItem itemValue="total" itemLabel="Pagar valor total" />		   	     							
-			</h:selectOneMenu></div>
-			<div class="panel-footer"><div align="right"><h:commandButton styleClass="btn btn-primary" 	value="Cadastrar" /></div>
+		<h:form id="contasReceber">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
+				<div class="panel-body">Digite os dados abaixo para cadastrar sua conta:</div>
+				<div class="panel-body"> Favorecido:
+					<h:inputText id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
+				</div>
+				<div class="panel-body"> Valor a receber:
+					<h:inputText id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100,00" />
+				</div>
+				<div class="panel-body"> Data de recebimento:
+					<h:inputText id="data" value="#{beanContasReceber.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
+				</div>
+				<div class="panel-body"> Opções de pagamento:
+					<h:selectOneMenu id="tipoPagamento" value="#{beanContasReceber.vo.tipoPagamento}">
+						<f:selectItem itemValue="1" itemLabel="Pagar valor total" />
+						<f:selectItem itemValue="2" itemLabel="Pagar valor parcial" />
+					</h:selectOneMenu>
+				</div>
+				<div class="panel-footer">
+					<div align="right">
+						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
+					</div>
+				</div>
 			</div>
-		</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

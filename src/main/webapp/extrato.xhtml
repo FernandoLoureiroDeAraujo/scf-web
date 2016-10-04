@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">>
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="titulo">Extratos</ui:define>
 
@@ -15,12 +15,8 @@
 				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
 				<div class="panel-body">Selecione um filtro para consultar seu extrato:</div>
 				<div class="panel-body"> Por data:
-					<h:inputText a:placeholder="Ex: xx/xx/xxxx" >
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:inputText>	até
-					<h:inputText a:placeholder="Ex: xx/xx/xxxx" >
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:inputText>
+					<h:inputText value="#{beanSaldo.vo.data1}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />	até
+					<h:inputText value="#{beanSaldo.vo.data2}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
 				</div>
 				<div class="panel-body"> Por mês de referência:
 					<h:selectOneMenu value="#{beanSaldo.vo.mesReferencia}">
@@ -44,12 +40,12 @@
 					</div>
 				</div>
 				
-				<h:dataTable value="#{beanSaldo.lista}" var="lista">
+				<h:dataTable rendered="#{not empty beanSaldo.lista}" value="#{beanSaldo.lista}" var="lista">
 					<h:column headerClass="helpHed" id="coluna1">
 						<f:facet name="header">
 							<h:outputText value="Conta"></h:outputText>
 						</f:facet>
-						<h:outputText value="#{lista.tipoPagamento}"></h:outputText>				
+						<h:outputText value="#{lista.enumTipoConta.tipoConta}"></h:outputText>				
 					</h:column>
 					<h:column headerClass="helpHed" id="coluna2">
 						<f:facet name="header">

@@ -7,33 +7,31 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Contas a Pagar</ui:define>
+	<ui:define name="titulo">Contas Pagas</ui:define>
 
 	<ui:define name="corpo">
-		<h:form id="contasReceber">
+		<h:form id="contasPagas">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
 				<div class="panel-body">Digite os dados abaixo para cadastrar sua conta:</div>
 				<div class="panel-body"> Favorecido:
-					<h:inputText id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
+					<h:inputText id="descricao" value="#{beanContasPagas.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
 				</div>
-				<div class="panel-body"> Valor a pagar:
-					<h:inputText id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100,00" />
+				<div class="panel-body"> Valor a pago:
+					<h:inputText id="valor" value="#{beanContasPagas.vo.valor}" a:placeholder="Ex: 100,00" />
 				</div>
-				<div class="panel-body"> Data de Vencimento:
-					<h:inputText id="dataVencimento" value="#{beanContasReceber.vo.dataVencimento}"	a:placeholder="Ex: xx/xx/xxxx">
-						<f:convertDateTime pattern="dd/MM/yyyy"/>					
-					</h:inputText>
+				<div class="panel-body"> Data de pagamento:
+					<h:inputText id="data" value="#{beanContasPagas.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
 				</div>
 				<div class="panel-body"> Opções de pagamento:
-					<h:selectOneMenu id="tipoPagamento" value="#{beanContasReceber.vo.tipoPagamento}">
+					<h:selectOneMenu id="tipoPagamento" value="#{beanContasPagas.vo.tipoPagamento}">
 						<f:selectItem itemValue="1" itemLabel="Pagar valor total" />
 						<f:selectItem itemValue="2" itemLabel="Pagar valor parcial" />
 					</h:selectOneMenu>
 				</div>
 				<div class="panel-footer">
 					<div align="right">
-						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
+						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasPagas.salvarContaPagas}"/>
 					</div>
 				</div>
 			</div>

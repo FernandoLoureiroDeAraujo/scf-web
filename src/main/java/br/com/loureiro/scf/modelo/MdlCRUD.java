@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.Map;
 
 import org.apache.log4j.LogManager;
@@ -31,7 +32,11 @@ public class MdlCRUD extends MdlConexaoBanco {
 
 			for(int i = 1, index = 1; i < fields.size(); i++) {
 				Object[] objects = fields.get(i);
-				stmt.setObject(index++, objects[1]);
+				if(i == 4) {
+					stmt.setDate(index++, Date.valueOf((LocalDate) objects[1]));
+				} else {
+					stmt.setObject(index++, objects[1]);
+				}
 			}
 			
 			logger.debug(stmt.toString());
@@ -49,10 +54,11 @@ public class MdlCRUD extends MdlConexaoBanco {
 		str.append(" VALUES (");
 		
 		for (int i = 0; i < fields.size() - 1; i++) {
-			if(!(i == fields.size() - 2)) 
+			if(!(i == fields.size() - 2)) { 
 				str.append("?,");
-			else 
+			} else {
 				str.append("?)");
+			}
 		}
 
 		return str.toString();
