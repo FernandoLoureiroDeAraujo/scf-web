@@ -13,27 +13,29 @@
 		<h:form id="contasReceber">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
-				<div class="panel-body">Digite os dados abaixo para cadastrar sua conta:</div>
-				<div class="panel-body"> Favorecido:
+				<div class="panel-body">  <h4>Digite os dados abaixo para cadastrar seu recebimento:</h4></div>
+				<div class="panel-body">
+					<h:outputLabel for="exampleSelect1" value = "Favorecido:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
 				</div>
-				<div class="panel-body"> Valor a receber:
+				<div class="panel-body"> 
+					<h:outputLabel for="exampleSelect1" value = "Valor a receber:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100,00" />
 				</div>
-				<div class="panel-body"> Data de recebimento:
+				<div class="panel-body">
+					<h:outputLabel for="exampleSelect1" value = "Data de recebimento:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="data" value="#{beanContasReceber.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
-				</div>
-				<div class="panel-body"> Opções de pagamento:
-					<h:selectOneMenu id="tipoPagamento" value="#{beanContasReceber.vo.tipoPagamento}">
-						<f:selectItem itemValue="1" itemLabel="Pagar valor total" />
-						<f:selectItem itemValue="2" itemLabel="Pagar valor parcial" />
-					</h:selectOneMenu>
 				</div>
 				<div class="panel-footer">
 					<div align="right">
-						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
+						<h:commandButton id="cadastrar" styleClass="btn btn-primary" value="Cadastrar" action="#{beanSaldo.relatorio}"/>
+						<h:outputText value="&#160;"/>
+						<h:commandButton styleClass="btn btn-primary" value="Limpar" type="reset" />
 					</div>
-				</div>
+					</div>
 			</div>
 		</h:form>
 	</ui:define>

@@ -5,7 +5,6 @@ import javax.faces.bean.ManagedBean;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import br.com.loureiro.scf.constante.EnumMensagens;
 import br.com.loureiro.scf.modelo.MdlCRUD;
 import br.com.loureiro.scf.vo.VoContasPagas;
 
@@ -15,8 +14,7 @@ public class BeanContasPagas {
 	private static final Logger logger = LogManager.getLogger(BeanContasPagas.class);
 	
 	VoContasPagas vo = new VoContasPagas();
-	String status = null;
-	
+	int status = -1;
 	public void salvarContaPagas() {
 		
 		MdlCRUD crud = null;
@@ -28,13 +26,13 @@ public class BeanContasPagas {
 			crud = new MdlCRUD();
 			crud.save(vo);
 			
-			status = EnumMensagens.DADOS_INSERIDOS_COM_SUCESSO.get();		
-			
+			status = 1;
 			logger.debug(status);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			status = EnumMensagens.ERRO_SERVICO_TEMPORARIAMENTE_INDISPONIVEL.get();
+			status = 0;
 		}
+
 	}
 
 	public VoContasPagas getVo() {
@@ -45,7 +43,7 @@ public class BeanContasPagas {
 		this.vo = vo;
 	}
 	
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 	

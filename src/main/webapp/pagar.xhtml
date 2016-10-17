@@ -5,7 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+		xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<ui:define name="titulo">Contas Pagas</ui:define>
 
@@ -13,26 +14,51 @@
 		<h:form id="contasPagas">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
-				<div class="panel-body">Digite os dados abaixo para cadastrar sua conta:</div>
-				<div class="panel-body"> Favorecido:
+				<div class="panel-body">   <h4>Digite os dados de pagamento</h4></div>
+				<div class="panel-body"> 
+					<h:outputLabel for="exampleSelect1" value = "Favorecido:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="descricao" value="#{beanContasPagas.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
 				</div>
-				<div class="panel-body"> Valor a pago:
+				<div class="panel-body"> 
+					<h:outputLabel for="exampleSelect1" value = "Valor a pagar:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="valor" value="#{beanContasPagas.vo.valor}" a:placeholder="Ex: 100,00" />
 				</div>
-				<div class="panel-body"> Data de pagamento:
+				<div class="panel-body">
+					<h:outputLabel for="exampleSelect1" value = " Data de pagamento:"/>
+					<h:outputText value="&#160;"/>
 					<h:inputText id="data" value="#{beanContasPagas.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
 				</div>
-				<div class="panel-body"> Opções de pagamento:
-					<h:selectOneMenu id="tipoPagamento" value="#{beanContasPagas.vo.tipoPagamento}">
-						<f:selectItem itemValue="1" itemLabel="Pagar valor total" />
-						<f:selectItem itemValue="2" itemLabel="Pagar valor parcial" />
-					</h:selectOneMenu>
-				</div>
+	
+				<c:choose>
+						<c:when test="#{beanContasPagas.status == 1}" >
+						<div class="alert alert-success">
+					  	<strong>Successo!</strong>   
+					  	<h:outputText value="&#160;"/>
+					  	<h:outputText value="Dados de pagamento cadastrados com sucesso!"/>
+						</div>
+							</c:when>
+							<c:when test="#{beanContasPagas.status == 0}" >
+								<div class="alert alert-danger">
+								<strong>Ops!</strong>   
+					  				<h:outputText value="&#160;"/>
+					  				<h:outputText value="Erro ao cadastrar os dados" />
+								</div>
+							</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
 				<div class="panel-footer">
 					<div align="right">
-						<h:commandButton styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasPagas.salvarContaPagas}"/>
+						<h:commandButton id="cadastrar" styleClass="btn btn-primary" value="Cadastrar" action="#{beanContasPagas.salvarContaPagas}"/>
+						<h:outputText value="&#160;"/>
+						<h:commandButton styleClass="btn btn-primary" value="Limpar" type="reset" />
 					</div>
+					
+					
+					
+<!-- 						<h:messages  globalOnly="true"  for="cadastrar" infoStyle="color:darkgreen" errorStyle="color:darkred"/>  -->
 				</div>
 			</div>
 		</h:form>
