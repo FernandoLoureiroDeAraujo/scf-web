@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -5,68 +6,52 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 <h:head>
-	<title><ui:insert name="titulo">Contas a Pagar</ui:insert></title>
+	<title><ui:insert name="titulo"></ui:insert></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+    <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+    <h:outputScript name="bootstrap/js/bootstrap.js" />
+<!-- 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" /> -->
+	
 </h:head>
 
 <h:body>
-
-	<h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
-	<h:outputScript library="bootstrap" name="js/bootstrap.min.js"></h:outputScript>
-	<header>
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> 
-						<span class="icon-bar"></span> 
-						<span class="icon-bar"></span> 
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="pagar.xhtml">Contas a Pagar</a>
+	<h:form id="form">
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="">SCF</a>
+					</div>
+	
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><a href="pagar.xhtml">Contas pagas</a></li>
+							<li><a href="receber.xhtml">Contas recebidas</a></li>
+							<li><a href="extrato.xhtml">Extrato</a></li>
+						</ul>
+					</div>
 				</div>
-
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="receber.xhtml">Valores a Receber<span class="sr-only">(current)</span></a></li>
-						<li><a href="extrato.xhtml">Extratos</a></li>
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
+			</nav>
+		</header>
+	
+		<div id="conteudo" class="container-fluid">
+			<ui:insert name="corpo"/>
+		</div>
+	
+		<footer class="container-fluid">
+			<div class="panel-footer">
+					<div align="center">
+						<p>SCF - Sistema de controle financeiro - By Méfius  Fefo </p>
+					</div>
 			</div>
-			<!-- /.container-fluid -->
-		</nav>
-	</header>
-
-
-	<div id="conteudo" class="container-fluid">
-		<ui:insert name="corpo"/>
-	</div>
-
-	<footer>
- 		<div class="span4" style="margin-top: 10%"> </div>
-		<div class="footer-bottom">
-        <div class="container">
-            <p class="pull-left"> Sistema de Cadastro de contas - SCC - By Méfius & Fefo </p>
-            <div class="pull-right">
-                <ul class="nav nav-pills payments">
-                	<li><i class="fa fa-cc-visa"></i></li>
-                    <li><i class="fa fa-cc-mastercard"></i></li>
-                    <li><i class="fa fa-cc-amex"></i></li>
-                    <li><i class="fa fa-cc-paypal"></i></li>
-                </ul> 
-            </div>
-            </div>
-            </div>
-	</footer>
-	
-	<style>
-		body {
-			margin-top: 70px !important
-		}
-	</style>
-	
+		</footer>
+				
+		<style>
+			body {
+				margin-top: 70px !important
+			}
+		</style>
+	</h:form>
 </h:body>
 </html>

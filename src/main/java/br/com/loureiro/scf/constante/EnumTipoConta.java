@@ -10,7 +10,7 @@ public enum EnumTipoConta {
     private EnumTipoConta(String tipoConta) {
 		this.tipoConta = tipoConta;
 	}
-    public String getTipoConta() {
+    public String get() {
 		return tipoConta;
 	}
 }

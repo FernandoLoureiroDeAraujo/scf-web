@@ -5,39 +5,54 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-	<ui:define name="titulo">Contas Receber</ui:define>
+	<ui:define name="titulo">Contas recebidas</ui:define>
 
 	<ui:define name="corpo">
-		<h:form id="contasReceber">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Bem vindo ao SCC - Sistema de Cadastro de Contas</div>
-				<div class="panel-body">  <h4>Digite os dados abaixo para cadastrar seu recebimento:</h4></div>
-				<div class="panel-body">
-					<h:outputLabel for="exampleSelect1" value = "Favorecido:"/>
-					<h:outputText value="&#160;"/>
-					<h:inputText id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de Luz" />
-				</div>
-				<div class="panel-body"> 
-					<h:outputLabel for="exampleSelect1" value = "Valor a receber:"/>
-					<h:outputText value="&#160;"/>
-					<h:inputText id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100,00" />
-				</div>
-				<div class="panel-body">
-					<h:outputLabel for="exampleSelect1" value = "Data de recebimento:"/>
-					<h:outputText value="&#160;"/>
-					<h:inputText id="data" value="#{beanContasReceber.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: xx/xx/xxxx" />
-				</div>
-				<div class="panel-footer">
-					<div align="right">
-						<h:commandButton id="cadastrar" styleClass="btn btn-primary" value="Cadastrar" action="#{beanSaldo.relatorio}"/>
-						<h:outputText value="&#160;"/>
-						<h:commandButton styleClass="btn btn-primary" value="Limpar" type="reset" />
-					</div>
-					</div>
+		<div class="panel panel-success">
+			<div class="panel-heading"><h4>Contas recebidas</h4></div>
+			<div class="panel-body">
+				<h:outputLabel value = "Favorecido:"/>
+				<h:inputText class="form-control" id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de luz" />
 			</div>
-		</h:form>
+			<div class="panel-body"> 
+				<h:outputLabel value = "Valor a receber:"/>
+				<h:inputText class="form-control" id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100.00" />
+			</div>
+			<div class="panel-body">
+				<h:outputLabel value = "Data de recebimento:"/>
+				<h:inputText class="form-control" id="data" value="#{beanContasReceber.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: 01/01/1970" />
+			</div>
+			
+			<c:choose>
+				<c:when test="#{beanContasReceber.status == 1}" >
+					<div class="alert alert-success">
+					  	<strong>Sucesso!</strong>   
+					  	<h:outputText value="&#160;"/>
+					  	<h:outputText value="Dados de recebimento cadastrados com sucesso!"/>
+					</div>
+				</c:when>
+				<c:when test="#{beanContasReceber.status == 0}" >
+					<div class="alert alert-danger">
+						<strong>Ops!</strong>   
+		  				<h:outputText value="&#160;"/>
+		  				<h:outputText value="Erro ao cadastrar os dados" />
+					</div>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+			
+			<div class="panel-footer">
+				<div align="right">
+					<h:commandButton id="cadastrar" styleClass="btn btn-success" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
+					<h:outputText value="&#160;"/>
+					<h:commandButton value="Limpar" type="reset" class="btn btn-success" />
+				</div>
+			</div>
+		</div>
 	</ui:define>
-
+	
 </ui:composition>

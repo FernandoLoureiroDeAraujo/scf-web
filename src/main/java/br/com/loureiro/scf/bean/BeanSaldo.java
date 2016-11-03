@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import br.com.loureiro.scf.constante.EnumMensagens;
+import br.com.loureiro.scf.constante.EnumStatus;
 import br.com.loureiro.scf.constante.EnumTipoConta;
 import br.com.loureiro.scf.modelo.MdlCRUD;
 import br.com.loureiro.scf.vo.VoContas;
@@ -35,7 +35,7 @@ public class BeanSaldo {
 	private Double somarPagar = 0D;
 	private Double somarReceber = 0D;
 	
-	private String status = null;
+	private int status = EnumStatus.INDEFINIDO.get();
 	
 	public void relatorio() {		
 		try {			
@@ -45,10 +45,10 @@ public class BeanSaldo {
 			selecionarContasRecebidas();
 			ordenarLista();
 			calculandoTotal();			
-			status = EnumMensagens.SUCESSO.get();			
+			status = EnumStatus.SUCESSO.get();			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			status = EnumMensagens.ERRO_SERVICO_TEMPORARIAMENTE_INDISPONIVEL.get();
+			status = EnumStatus.ERROR.get();
 		}
 	}
 
@@ -126,7 +126,7 @@ public class BeanSaldo {
 		return lista;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 	

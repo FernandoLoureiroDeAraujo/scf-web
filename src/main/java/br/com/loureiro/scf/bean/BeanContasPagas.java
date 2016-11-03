@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedBean;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.com.loureiro.scf.constante.EnumStatus;
 import br.com.loureiro.scf.modelo.MdlCRUD;
 import br.com.loureiro.scf.vo.VoContasPagas;
 
@@ -13,10 +14,11 @@ public class BeanContasPagas {
 	
 	private static final Logger logger = LogManager.getLogger(BeanContasPagas.class);
 	
+	private int status = EnumStatus.INDEFINIDO.get();
 	VoContasPagas vo = new VoContasPagas();
-	int status = -1;
+	
 	public void salvarContaPagas() {
-		
+		vo.setTipoPagamento(1);
 		MdlCRUD crud = null;
 		
 		try {
@@ -26,11 +28,11 @@ public class BeanContasPagas {
 			crud = new MdlCRUD();
 			crud.save(vo);
 			
-			status = 1;
+			status = EnumStatus.SUCESSO.get();
 			logger.debug(status);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			status = 0;
+			status = EnumStatus.ERROR.get();
 		}
 
 	}
