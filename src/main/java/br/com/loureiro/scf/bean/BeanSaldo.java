@@ -16,8 +16,6 @@ import br.com.loureiro.scf.constante.EnumStatus;
 import br.com.loureiro.scf.constante.EnumTipoConta;
 import br.com.loureiro.scf.modelo.MdlCRUD;
 import br.com.loureiro.scf.vo.VoContas;
-import br.com.loureiro.scf.vo.VoContasPagas;
-import br.com.loureiro.scf.vo.VoContasReceber;
 import br.com.loureiro.scf.vo.VoSaldo;
 
 @ManagedBean
@@ -28,8 +26,8 @@ public class BeanSaldo {
 	private VoSaldo vo = new VoSaldo();
 	
 	private List<VoContas> lista;
-	private List<VoContasPagas> listaPagas;
-	private List<VoContasReceber> listaReceber;
+	private List<VoContas> listaPagas;
+	private List<VoContas> listaReceber;
 	
 	private Double somar = 0D;
 	private Double somarPagar = 0D;
@@ -39,13 +37,14 @@ public class BeanSaldo {
 	
 	public void relatorio() {		
 		try {			
-			verificaData();
 			iniciandoVariaveis();
+			verificaData();
 			selecionarContasPagas();
 			selecionarContasRecebidas();
 			ordenarLista();
 			calculandoTotal();			
-			status = EnumStatus.SUCESSO.get();			
+			status = EnumStatus.SUCESSO.get();	
+			vo = new VoSaldo();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			status = EnumStatus.ERROR.get();
@@ -72,27 +71,26 @@ public class BeanSaldo {
 	
 	private void selecionarContasPagas() throws Exception {	
 		logger.debug("selecionando contas pagas");
-		selecionar(VoContasPagas.class, listaPagas, EnumTipoConta.CONTA_PAGAR);
+		selecionar(listaPagas, EnumTipoConta.CONTA_PAGA);
 		somarPagar = somar;
 	}
 	
 	private void selecionarContasRecebidas() throws Exception {
 		logger.debug("selecionando contas recebidas");
-		selecionar(VoContasReceber.class, listaReceber, EnumTipoConta.CONTA_RECEBER);
+		selecionar(listaReceber, EnumTipoConta.CONTA_RECEBIDA);
 		somarReceber = somar;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> void selecionar(Class<?> mClass, List<T> mLista, EnumTipoConta mEnum) throws Exception {
+	private <T> void selecionar(List<T> mLista, EnumTipoConta mEnum) throws Exception {
 		somar = 0D;
-		new MdlCRUD().find(mClass, vo, (rset) -> { 
+		new MdlCRUD().find(vo, mEnum, (rset) -> { 
 			while(rset.next()) {
-				mLista.add((T) new VoContas(mEnum,
-										    rset.getInt(1), 
+				mLista.add((T) new VoContas(rset.getInt(1), 
 										    rset.getString(2), 
 										    rset.getDouble(3), 
 										    LocalDate.parse(rset.getDate(4).toString()), 
-										    rset.getInt(5)));
+										    EnumTipoConta.getEnumTipoConta(rset.getInt(5))));
 				somar += rset.getDouble(3);
 			}
 		});
@@ -104,7 +102,7 @@ public class BeanSaldo {
 		
 		lista.sort((VoContas o1, VoContas o2)->{
 			Integer compare1 = o1.getTipoPagamento().compareTo(o2.getTipoPagamento());
-			Integer compare2 = o1.getData().compareTo(o2.getData());
+			Integer compare2 = o1.getDataAsString().compareTo(o2.getDataAsString());
 			return compare1.compareTo(compare2);
 		});
 	}
@@ -115,7 +113,7 @@ public class BeanSaldo {
 		Double resultado = somarPagar - somarReceber;
 		NumberFormat decimalFormat = new DecimalFormat("#.00");     
 		resultado = Double.valueOf(decimalFormat.format(resultado).replaceAll(",", "."));
-		lista.add(new VoContas(null, null, resultado, null, null));
+		lista.add(new VoContas(null, null, resultado, null, EnumTipoConta.TOTAL));
 	}
 
 	public VoSaldo getVo() {

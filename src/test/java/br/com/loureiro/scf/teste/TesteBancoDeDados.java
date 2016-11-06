@@ -1,17 +1,16 @@
 package br.com.loureiro.scf.teste;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.time.LocalDate;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.loureiro.scf.constante.EnumTipoConta;
 import br.com.loureiro.scf.modelo.MdlCRUD;
 import br.com.loureiro.scf.modelo.MdlConexaoBanco;
-import br.com.loureiro.scf.vo.VoContasPagas;
-import br.com.loureiro.scf.vo.VoContasReceber;
+import br.com.loureiro.scf.vo.VoContas;
 import br.com.loureiro.scf.vo.VoSaldo;
 
 public class TesteBancoDeDados {
@@ -27,25 +26,25 @@ public class TesteBancoDeDados {
 	@Ignore
 	public void testeSalvarContasReceber() throws Exception {		
 		MdlCRUD crud = new MdlCRUD();		
-		crud.save(new VoContasReceber(null, "Conta 2", 100D, LocalDate.now(), 1));
+		crud.save(new VoContas(null, "Conta 2", 100D, LocalDate.now(), EnumTipoConta.CONTA_PAGA));
 	}
 	
 	Double somarReceber = 0D;
 	
 	@Test
+	@Ignore
 	public void testeSelecionarContasPagas() throws Exception {
 		
 		VoSaldo vo = new VoSaldo(LocalDate.of(2000, 1, 1), LocalDate.of(2070, 1, 1));
-		List<VoContasPagas> lista = new ArrayList<>();
+		List<VoContas> lista = new ArrayList<>();
 		
-		new MdlCRUD().find(VoContasPagas.class, vo, (rset) -> { 
+		new MdlCRUD().find(vo, EnumTipoConta.CONTA_PAGA, (rset) -> { 
 			while(rset.next()) {
-				lista.add(new VoContasPagas(EnumTipoConta.CONTA_PAGAR,
-											rset.getInt(1), 
+				lista.add(new VoContas(rset.getInt(1), 
 											rset.getString(2), 
 											rset.getDouble(3), 
 											LocalDate.parse(rset.getDate(4).toString()),
-											rset.getInt(5)));
+											EnumTipoConta.getEnumTipoConta(rset.getInt(5))));
 				
 				somarReceber += rset.getDouble(3);
 			}

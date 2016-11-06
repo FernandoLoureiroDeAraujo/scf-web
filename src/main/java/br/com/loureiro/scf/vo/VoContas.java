@@ -7,36 +7,21 @@ import br.com.loureiro.scf.util.UtlScf;
 
 public class VoContas {
 	
-	protected EnumTipoConta enumTipoConta;
-	protected Integer id;
-	protected String descricao;
-	protected Double valor;
-	protected LocalDate data;
-	protected Integer tipoPagamento;
+	private Integer id;
+	private String descricao;
+	private Double valor;
+	private LocalDate data;
+	private Integer tipoPagamento;
 
 	public VoContas() {}
 	
-	public VoContas(Integer id, String descricao, Double valor, LocalDate data, Integer tipoPagamento) {
+	public VoContas(Integer id, String descricao, Double valor, LocalDate data, EnumTipoConta tipoPagamento) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.data = data;
-		this.tipoPagamento = tipoPagamento;
-	}
-	
-	public VoContas(EnumTipoConta enumTipoConta, Integer id, String descricao, Double valor, LocalDate data, Integer tipoPagamento) {
-		super();
-		this.enumTipoConta = enumTipoConta;
-		this.id = id;
-		this.descricao = descricao;
-		this.valor = valor;
-		this.data = data;
-		this.tipoPagamento = tipoPagamento;
-	}
-	
-	public EnumTipoConta getEnumTipoConta() {
-		return enumTipoConta;
+		this.tipoPagamento = tipoPagamento.getValor();
 	}
 
 	public Integer getId() {
@@ -51,16 +36,16 @@ public class VoContas {
 		return valor;
 	}
 
+	public String getDataAsString() {
+		return UtlScf.formatarData(data);
+	}
+	
 	public LocalDate getData() {
 		return data;
 	}
 
-	public Integer getTipoPagamento() {
-		return tipoPagamento;
-	}
-
-	public void setEnumTipoConta(EnumTipoConta enumTipoConta) {
-		this.enumTipoConta = enumTipoConta;
+	public EnumTipoConta getTipoPagamento() {
+		return EnumTipoConta.getEnumTipoConta(tipoPagamento);
 	}
 
 	public void setId(Integer id) {
@@ -79,8 +64,8 @@ public class VoContas {
 		this.data = data;
 	}
 
-	public void setTipoPagamento(Integer tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
+	public void setTipoPagamento(EnumTipoConta tipoPagamento) {
+		this.tipoPagamento = tipoPagamento.getValor();
 	}
 
 	@Override

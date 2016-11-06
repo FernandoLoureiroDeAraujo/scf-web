@@ -11,46 +11,69 @@
 	<ui:define name="titulo">Contas recebidas</ui:define>
 
 	<ui:define name="corpo">
-		<div class="panel panel-success">
-			<div class="panel-heading"><h4>Contas recebidas</h4></div>
-			<div class="panel-body">
-				<h:outputLabel value = "Favorecido:"/>
-				<h:inputText class="form-control" id="descricao" value="#{beanContasReceber.vo.descricao}" a:placeholder="Ex: Conta de luz" />
-			</div>
-			<div class="panel-body"> 
-				<h:outputLabel value = "Valor a receber:"/>
-				<h:inputText class="form-control" id="valor" value="#{beanContasReceber.vo.valor}" a:placeholder="Ex: 100.00" />
-			</div>
-			<div class="panel-body">
-				<h:outputLabel value = "Data de recebimento:"/>
-				<h:inputText class="form-control" id="data" value="#{beanContasReceber.vo.data}" converter="localDateTimeConverter" a:placeholder="Ex: 01/01/1970" />
-			</div>
-			
-			<c:choose>
-				<c:when test="#{beanContasReceber.status == 1}" >
-					<div class="alert alert-success">
-					  	<strong>Sucesso!</strong>   
-					  	<h:outputText value="&#160;"/>
-					  	<h:outputText value="Dados de recebimento cadastrados com sucesso!"/>
-					</div>
-				</c:when>
-				<c:when test="#{beanContasReceber.status == 0}" >
-					<div class="alert alert-danger">
-						<strong>Ops!</strong>   
-		  				<h:outputText value="&#160;"/>
-		  				<h:outputText value="Erro ao cadastrar os dados" />
-					</div>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-			
-			<div class="panel-footer">
-				<div align="right">
-					<h:commandButton id="cadastrar" styleClass="btn btn-success" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
-					<h:outputText value="&#160;"/>
-					<h:commandButton value="Limpar" type="reset" class="btn btn-success" />
+		<div class="form-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h4>Contas recebidas</h4></div>
+				
+				<div class=" panel-body"> 
+					<h:outputLabel value = "Favorecido:"/>
+					<h:inputText class="form-control" 
+								 id="descricao" 
+								 required="true" 
+								 requiredMessage="O campo favorecido não pode ser nulo!"
+								 value="#{beanContasReceber.vo.descricao}" 
+								 a:placeholder="Ex: Conta de luz" />
 				</div>
+				<div class="panel-body"> 
+					<h:outputLabel value = "Valor a receber:"/>
+					<h:inputText class="form-control mascara-moeda" 
+								 id="valor" 
+								 required="true" 
+								 requiredMessage="O campo valor não pode ser nulo!"
+								 converter="convertStringToDouble"
+								 value="#{beanContasReceber.vo.valor}" 
+								 a:placeholder="Ex: 100.00" />
+				</div>
+				<div class="panel-body">
+					<h:outputLabel value = "Data de recebimento:"/>
+					<h:inputText class="form-control data mascara-data" 
+								 id="data" 
+								 required="true" 
+								 requiredMessage="O campo data não pode ser nulo!"
+								 value="#{beanContasReceber.vo.data}" 
+								 converter="convertStringToLocalDate" 
+								 a:placeholder="Ex: 01/01/1970" />
+				</div>
+				
+				<div class="panel-footer">
+					<div align="right">
+						<h:commandButton id="cadastrar" styleClass="btn btn-raised btn-primary" value="Cadastrar" action="#{beanContasReceber.salvarContaReceber}"/>
+						<h:outputText value="&#160;"/>
+						<h:commandButton value="Limpar" type="reset" class="btn btn-raised btn-primary" />
+					</div>
+				</div>
+				
+				<h:messages class="alert alert-danger"/>
+	
+				<c:choose>
+					<c:when test="#{beanContasReceber.status == 1}" >
+						<div class="alert alert-success">
+						  	<strong>Sucesso!</strong>   
+						  	<h:outputText value="&#160;"/>
+						  	<h:outputText value="Dados de recebimento cadastrados com sucesso!"/>
+						</div>
+					</c:when>
+					<c:when test="#{beanContasReceber.status == 0}" >
+						<div class="alert alert-danger">
+							<strong>Ops!</strong>   
+			  				<h:outputText value="&#160;"/>
+			  				<h:outputText value="Erro ao cadastrar os dados" />
+						</div>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 	</ui:define>

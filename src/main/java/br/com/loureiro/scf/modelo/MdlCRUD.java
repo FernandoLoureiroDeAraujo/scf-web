@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.com.loureiro.scf.constante.EnumTipoConta;
 import br.com.loureiro.scf.util.UtlScf;
 import br.com.loureiro.scf.vo.VoSaldo;
 
@@ -21,18 +22,16 @@ public class MdlCRUD extends MdlConexaoBanco {
 	PreparedStatement stmt = null;	
 	ResultSet rset = null;
 	
-	Map<Integer, Object[]> fields = null;
-
 	public void save(Object mClass) throws Exception {		
 		try {			
-			fields = UtlScf.getFieldNamesAndValues(mClass);
+			Map<Integer, Object[]> fields = UtlScf.getFieldNamesAndValues(mClass);
 
 			conn = getConexao();
-			stmt = conn.prepareStatement(mountSaveQuery(mClass));			
+			stmt = conn.prepareStatement(mountSaveQuery());			
 
 			for(int i = 1, index = 1; i < fields.size(); i++) {
 				Object[] objects = fields.get(i);
-				if(i == 4) {
+				if(i == 3) {
 					stmt.setDate(index++, Date.valueOf((LocalDate) objects[1]));
 				} else {
 					stmt.setObject(index++, objects[1]);
@@ -47,29 +46,20 @@ public class MdlCRUD extends MdlConexaoBanco {
 		}
 	}
 	
-	private String mountSaveQuery(Object mClass) {		
+	private String mountSaveQuery() {
 		StringBuilder str = new StringBuilder();
-		str.append(" INSERT INTO ");
-		str.append(mClass.getClass().getSimpleName().replace("Vo", "Tbl"));
-		str.append(" VALUES (");
-		
-		for (int i = 0; i < fields.size() - 1; i++) {
-			if(!(i == fields.size() - 2)) { 
-				str.append("?,");
-			} else {
-				str.append("?)");
-			}
-		}
-
+		str.append(" INSERT INTO TblControleFinanceiro ");		
+		str.append(" VALUES (null,?,?,?,?) ");
 		return str.toString();
 	}
 	
-	public void find(Class<?> mClass, VoSaldo vo, MdlCrudResult crudResult) throws Exception {
+	public void find(VoSaldo vo, EnumTipoConta mEnum, MdlCrudResult crudResult) throws Exception {
         try {
         	conn = getConexao();
-            stmt = conn.prepareStatement(mountFindQuery(mClass, vo));
-            stmt.setDate(1, Date.valueOf(vo.getData1()));
-            stmt.setDate(2, Date.valueOf(vo.getData2()));
+            stmt = conn.prepareStatement(mountFindQuery());
+            stmt.setInt (1, mEnum.getValor());
+            stmt.setDate(2, Date.valueOf(vo.getData1()));
+            stmt.setDate(3, Date.valueOf(vo.getData2()));
             
     		logger.debug(stmt.toString());
             
@@ -81,12 +71,11 @@ public class MdlCRUD extends MdlConexaoBanco {
         }
 	}
 	
-	private String mountFindQuery(Class<?> mClass, VoSaldo vo) {
+	private String mountFindQuery() {
 		StringBuilder str = new StringBuilder();
-		str.append(" SELECT * FROM ");		
-		str.append(mClass.getSimpleName().replace("Vo", "Tbl"));
-		str.append(" WHERE PERIODO ");
-		str.append(" BETWEEN (?) AND (?) ");
+		str.append(" SELECT * FROM TblControleFinanceiro ");		
+		str.append(" WHERE TIPO_PAGAMENTO = ? ");
+		str.append(" AND PERIODO BETWEEN (?) AND (?) ");
 		return str.toString();
 	}
 	

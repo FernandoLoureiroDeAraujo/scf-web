@@ -16,7 +16,7 @@ public class MdlConexaoBanco {
 	private static final String CLASS = "org.mariadb.jdbc.Driver";	
 	private static final String URL = "jdbc:mariadb://localhost:3306/DB_SCF";
 	private static final String USUARIO = "root";
-	private static final String SENHA = "";
+	private static final String SENHA = "skynet";
 	
 	// Método de Conexão
 	public Connection getConexao() {

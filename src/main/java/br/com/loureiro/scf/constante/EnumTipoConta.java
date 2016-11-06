@@ -2,15 +2,30 @@ package br.com.loureiro.scf.constante;
 
 public enum EnumTipoConta {
 
-	CONTA_PAGAR("Contas pagas"), 
-	CONTA_RECEBER("Contas recebidas");
+	TOTAL(-1, "Total"),
+	CONTA_PAGA(0, "Conta paga"), 
+	CONTA_RECEBIDA(1, "Conta recebida");
 	
-    private final String tipoConta;
+	private final Integer valor;
+    private final String descricao;
     
-    private EnumTipoConta(String tipoConta) {
-		this.tipoConta = tipoConta;
+    private EnumTipoConta(Integer valor, String descricao) {
+    	this.valor = valor;
+		this.descricao = descricao;
 	}
-    public String get() {
-		return tipoConta;
+    
+    public Integer getValor() {
+		return valor;
 	}
+    public String getDescricao() {
+		return descricao;
+	}
+    
+    public static EnumTipoConta getEnumTipoConta(Integer id) {
+        if(id == null) return null;
+        for (EnumTipoConta enumTipoConta : EnumTipoConta.values()) {
+            if(enumTipoConta.getValor().equals(id)) return enumTipoConta;
+        }
+        return null;
+    }
 }

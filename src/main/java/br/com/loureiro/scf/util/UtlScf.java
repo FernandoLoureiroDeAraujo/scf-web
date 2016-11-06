@@ -1,11 +1,14 @@
 package br.com.loureiro.scf.util;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
+
+import org.apache.log4j.Logger;
 
 public class UtlScf {
 
@@ -46,6 +49,18 @@ public class UtlScf {
             str.append(objects[i]);
         }
         return str.toString();
+    }
+    
+    private static final String PATTERN = "dd/MM/yyyy";
+    public static String formatarData(LocalDate data) {
+    	
+    	if(data == null) {
+    		return null;
+    	}
+    	
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PATTERN);
+		String strLocalDate = data.format(formatter);
+    	return strLocalDate;
     }
 	
 }
