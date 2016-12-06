@@ -110,7 +110,7 @@ public class BeanSaldo {
 	private void calculandoTotal() {		
 		logger.debug("calculando total\n");
 		
-		Double resultado = somarPagar - somarReceber;
+		Double resultado = somarReceber - somarPagar;
 		NumberFormat decimalFormat = new DecimalFormat("#.00");     
 		resultado = Double.valueOf(decimalFormat.format(resultado).replaceAll(",", "."));
 		lista.add(new VoContas(null, null, resultado, null, EnumTipoConta.TOTAL));
