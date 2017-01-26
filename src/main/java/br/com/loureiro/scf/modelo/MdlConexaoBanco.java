@@ -14,9 +14,9 @@ public class MdlConexaoBanco {
 	private static final Logger logger = LogManager.getLogger(MdlConexaoBanco.class);
 
 	private static final String CLASS = "org.mariadb.jdbc.Driver";	
-	private static final String URL = "jdbc:mariadb://localhost:3306/DB_SCF";
-	private static final String USUARIO = "root";
-	private static final String SENHA = "skynet";
+	private static final String URL = System.getProperty("${DB_URL}");
+	private static final String USUARIO = System.getProperty("${DB_USERNAME}");
+	private static final String SENHA = System.getProperty("${DB_PASSWORD}");
 	
 	// Método de Conexão
 	public Connection getConexao() {
